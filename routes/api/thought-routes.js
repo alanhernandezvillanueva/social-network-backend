@@ -11,13 +11,15 @@ const {
 
 
     //CRUD ROUTES GO HERE 
-router.route('/:id').post(createThought);
+
 
 router.route('/:id')
 .get(getThoughtById)
 .delete(removeThought)
 
-router.route('/').get(getThoughts);
+router.route('/')
+.get(getThoughts)
+.post(createThought);
 
 router.route('/:id').put(updateThought);
 
