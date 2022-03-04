@@ -14,7 +14,7 @@ const thoughtController = {
     })
     .then(dbUserData => {
         if (!dbUserData) {
-          res.status(404).json({ message: 'No thought found with this id!' });
+          res.status(200).json({ message: 'Thought added to api' });
           return;
         }
         res.json(dbUserData);
