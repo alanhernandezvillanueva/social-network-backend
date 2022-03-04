@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { 
-    createThought, 
+    addThought, 
     removeThought, 
     addReaction, 
     getThoughts, 
@@ -11,6 +11,7 @@ const {
 
 
     //CRUD ROUTES GO HERE 
+    
 
 
 router.route('/:id')
@@ -18,8 +19,9 @@ router.route('/:id')
 .delete(removeThought)
 
 router.route('/')
-.get(getThoughts)
-.post(createThought);
+.get(getThoughts).post(addThought)
+;
+
 
 router.route('/:id').put(updateThought);
 
