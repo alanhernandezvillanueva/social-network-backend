@@ -43,31 +43,32 @@ const thoughtController = {
 
   // remove comment
   removeThought({ params }, res) {
-    Thought.findOneAndDelete({ _id: params.id})
-      .then(deletedThought => {
+    Thought.findOneAndDelete({ _id: params.thoughtId })
+    .then(deletedThought => {
         if (!deletedThought) {
-          return res.status(404).json({ message: 'No thought with this id!' });
+            return res.status(404).json({ message: 'No thought with this id found' });
         }
         return User.findOneAndUpdate(
             { username: thoughtText.username },
-            { $pull: { thoughts: params.id } },
+            { $pull: { thoughts: params.thoughtId } },
             { new: true }
-        );
-      })
-      .then(dbUserData => {
+        ); 
+    })
+    .then(dbUserData => {
         if (!dbUserData) {
-          res.status(404).json({ message: 'No thought found with this id!' });
-          return;
+            res.status(404).json({ message: "No thought found with this id!" });
+            return;
         }
         res.json(dbUserData);
-      })
-      .catch(err => res.json(err));
-  },
+    })
+    .catch(err => res.json(err));
+},
 
   getThoughts(req, res) {
     Thought.find({})
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
+
             console.log(err);
             res.status(400).json(err);
         });
